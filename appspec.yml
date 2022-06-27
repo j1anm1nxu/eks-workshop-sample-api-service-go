@@ -1,0 +1,26 @@
+version: 0.0
+os: linux 
+files:
+  - source: /
+    destination: /var/tmp/eks
+hooks:
+  ApplicationStart:
+    - location: script/start.sh
+      timeout: 3600
+      runas: root
+
+    - location: script/create.sh
+      timeout: 3600
+      runas: root
+
+    - location: script/update.sh
+      timeout: 3600
+      runas: root
+
+    - location: script/delete.sh
+      timeout: 3600
+      runas: root
+    
+    - location: script/verify.sh
+      timeout: 3600
+      runas: root
