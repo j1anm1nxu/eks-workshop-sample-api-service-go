@@ -34,7 +34,7 @@ Parameters:
 
   GitHubToken:
     Type: String
-    Default: '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'
+    Default: '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'
     NoEcho: true
     Description: GitHub API token (90 days) - see https://github.com/blog/1509-personal-api-tokens
     MinLength: 3
@@ -65,6 +65,15 @@ Parameters:
     MaxLength: 100
     ConstraintDescription: You must enter a kubectl IAM role
 
+  DeployApplication:
+    Type: String
+    Default: jimxu7eks1deploy
+    Description: CodeDeploy Application
+
+  DeployGroup:
+    Type: String
+    Default: jimxu7eks1deploy
+    Description: CodeDeploy Deployment Group
 
 Metadata:
   AWS::CloudFormation::Interface:
@@ -281,7 +290,21 @@ Resources:
                 - Name: App
               OutputArtifacts:
                 - Name: BuildOutput
-              RunOrder: 1
+              RunOrder: 2
+        - Name: Deploy
+          Actions:
+            - Name: Deploy
+              InputArtifacts:
+                - Name: BuildOutput
+              ActionTypeId:
+                Category: Deploy
+                Owner: AWS
+                Version: 1
+                Provider: CodeDeploy
+              Configuration:
+                ApplicationName: !Ref DeployApplication
+                DeploymentGroupName: !Ref DeployGroup
+              RunOrder: 3
     DependsOn: CodeBuildProject
 
 Outputs:
