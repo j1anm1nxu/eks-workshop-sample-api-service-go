@@ -37,10 +37,10 @@ phases:
       - aws eks update-kubeconfig --name $EKS_CLUSTER_NAME --region $AWS_DEFAULT_REGION
       - cat /root/.kube/config
       - aws eks get-token --cluster-name jimxu7eks1 --region us-east-1
-      - kubectl get pods -A
-      - cat hello-k8s.yml
-      - kubectl apply -f hello-k8s.yml
-      - kubectl get pods -A
+      # - kubectl get pods -A
+      # - cat hello-k8s.yml
+      # - kubectl apply -f hello-k8s.yml
+      # - kubectl get pods -A
       - printf '[{"name":"hello-k8s","imageUri":"%s"}]' $REPOSITORY_URI:$TAG > build.json
 artifacts:
   files:
