@@ -37,8 +37,7 @@ phases:
       - aws eks update-kubeconfig --name $EKS_CLUSTER_NAME --region $AWS_DEFAULT_REGION
       - cat /root/.kube/config
       - aws eks get-token --cluster-name jimxu7eks1 --region us-east-1
-      - kubectl get all --all-namespaces
-      - kubectl get -n kube-system configmap/aws-auth -o yaml
+      - kubectl get pods
       - cat hello-k8s.yml
       - kubectl apply -f hello-k8s.yml
       - kubectl get pods -A
